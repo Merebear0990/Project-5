@@ -1,0 +1,21 @@
+@baseUrl = http://localhost:3000/api/products
+###
+GET {{baseUrl}}/ 
+
+###
+GET {{baseUrl}}/107fb5b75607497b96722bda5b504926
+
+###
+POST  {{baseUrl}}/order
+content-type: application/json
+
+{
+    "contacts": {  
+        "firstName": "John",
+        "lastName": "" ,
+        "address": "",
+        "city": "", 
+        "email": "" 
+     },
+    "products": []
+}
