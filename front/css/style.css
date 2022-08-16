@@ -100,9 +100,13 @@ h2 {
 	margin-left: 50px;
 	color: var(--text-color);
 }
-.menu nav ul li:hover {
+.menu nav ul li a:hover {
 	font-weight: 600;
 	color: #3498db !important;
+}
+
+ a:visited {
+	color: black !important;
 }
 
 /*banniere*/
