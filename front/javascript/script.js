@@ -9,25 +9,23 @@ fetch("http://127.0.0.1:3000/api/products")
     return resp.json();
   }).then(function (data) {
     data.forEach(function (item) {
-      // console.debug(item);
+    console.debug(item);
 
-      var articleElement = document.createElement('article');
+  
 
-      // This is lazy, but it will work for now. "JQuery" helps with this dynamic HTML code creation
+      let articleElement = document.createElement('article');
+      let anchor = document.createElement('a');
+      
+      
+
       articleElement.innerHTML =
         `<img src="${item.imageUrl}" alt="${item.altTxt}">
          <h3 class="productName">${item.name}</h3>
          <p class="productDescription">${item.description}</p>`;
 
-      /* What the code above is supposed to generate:
-        <article>
-          <img src=".../product01.jpg" alt="Lorem ipsum dolor sit amet, Kanap name1">
-          <h3 class="productName">Kanap name1</h3>
-          <p class="productDescription">Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu.</p>
-        </article>
-      */
+      
 
-      // Grab the "Items" part of the page by using the HTML element ID
+     
       var itemsSection = document.getElementById("items");
 
       // Append the article element we just created abolve to the items secdtion
