@@ -9,27 +9,33 @@ fetch("http://127.0.0.1:3000/api/products")
     return resp.json();
   }).then(function (data) {
     data.forEach(function (item) {
-    console.debug(item);
+      console.debug(item);
 
-  
 
-      let articleElement = document.createElement('article');
-      let anchor = document.createElement('a');
-      
-      
 
-      articleElement.innerHTML =
-        `<img src="${item.imageUrl}" alt="${item.altTxt}">
-         <h3 class="productName">${item.name}</h3>
-         <p class="productDescription">${item.description}</p>`;
-
-      
-
+      let anchorElement = document.createElement('a');
      
-      var itemsSection = document.getElementById("items");
+      
+      
+
+
+
+
+      anchorElement.innerHTML =
+        `<article><img src="${item.imageUrl}" alt="${item.altTxt}">
+         <h3 class="productName">${item.name}</h3>
+         <p class="productDescription">${item.description}</p></article>`;
+         
+
+
+
+         
+
+
+      let itemsSection = document.getElementById("items");
 
       // Append the article element we just created abolve to the items secdtion
-      itemsSection.appendChild(articleElement);
+      itemsSection.appendChild(anchorElement);
 
 
     });
