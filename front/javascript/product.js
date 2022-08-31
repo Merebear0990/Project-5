@@ -12,10 +12,10 @@ let cartString = localStorage.getItem('cart') || '[]';
 
 let cartArray = JSON.parse(cartString);
 
-const productObject = {
+const product = {
     _id: '',
     name: '',
-    imageURL: '',
+    imageUrl: '',
     altTxt: '',
     color: '',
     quantity: 1
@@ -30,33 +30,33 @@ fetch("http://127.0.0.1:3000/api/products/" + _id)
     })
     .catch(error => console.log(error));
 
-function makeProductCard(obj) {
-    const prodImg = document.querySelector('.item_img');
-    const productDescription = document.getElementById('descritption');
+function makeProductCard(productDetails) {
+    const prodImage = document.querySelector('.item__img');
+    const productDescription = document.getElementById('description');
     const prodPrice = document.getElementById('price');
     const prodTitle = document.getElementById('title');
     const prodQuantity = document.getElementById('quantity');
     const addBtn = document.getElementById('addToCart');
     const prodColors = document.getElementById('colors');
 
-    const itemImg = document.createElement('img');
-    itemImg.setAttribute('src', obj.imageURL);
-    itemImg.setAttribute('alt', obj.altTxt);
-    prodImg.appendChild(itemImg);
+    const itemImage = document.createElement('img');
+    itemImage.setAttribute('src', productDetails.imageUrl);
+    itemImage.setAttribute('alt', productDetails.altTxt);
+    prodImage.appendChild(itemImage);
 
-    prodPrice.innerHTML = obj.price;
-    prodTitle.innerHTML = obj.name;
-    productDescription.innerHTML = obj.description;
+    prodPrice.innerHTML = productDetails.price;
+    prodTitle.innerHTML = productDetails.name;
+    productDescription.innerHTML = productDetails.description;
 
     quantity.addEventListener('change', updateQuantity);
 
     addBtn.addEventListener('click', addToCart);
 
-    for (let i = 0; i < obj.colors.length; i++) {
+    for (let i = 0; i < productDetails.colors.length; i++) {
         const pulldown = document.createElement('option');
-        pulldown.setAttribute('value', obj.colors[i]);
-        pulldown.value = obj.colors[i];
-        pulldown.innerHTML = obj.colors[i];
+        pulldown.setAttribute('value', productDetails.colors[i]);
+        pulldown.value = productDetails.colors[i];
+        pulldown.innerHTML = productDetails.colors[i];
         prodColors.appendChild(pulldown);
         prodColors.addEventListener('change', updateColor);
     }
@@ -64,36 +64,41 @@ function makeProductCard(obj) {
 
 function updateQuantity(event) {
     console.log(event.target, event.target.value)
-    productObject.quantity = event.target.value;
-    console.log(productObject)
+    product.quantity = event.target.value;
+    console.log(product)
 }
 
 function updateColor(event) {
     console.log(event.target, event.target.value)
-    productObject.color = event.target.value;
-    console.log(productObject)
+    product.color = event.target.value;
+    console.log(product)
 }
 
-function initProdObject(object) {
-    productObject._id = object._id;
-    productObject.name = object.name;
-    productObject.imageURL = object.imageURL;
-    productObject.altTxt = object.altTxt;
+function initProdObject(productDetails) {
+    product._id = productDetails._id;
+    product.name = productDetails.name;
+    product.imageUrl = productDetails.imageUrl;
+    product.altTxt = productDetails.altTxt;
 
 }
 
 function addToCart(event) {
     let pushToCart = true;
+
+    if (pushToCart) {
+        cartArray.push(product);
+        syncCart();
+    }
 }
 
 console.log(cartArray);
 if (cartArray.length > 0) {
 
     for (let i = 0; i < cartArray.length; i++) {
-        if (productObject.name === cartArray[i].name &&
-            productObject.color === cartArray[i].color) {
+        if (product.name === cartArray[i].name &&
+            product.color === cartArray[i].color) {
 
-            cartArray[i].quantity = cartArray[i].quantity + productObject.quantity;
+            cartArray[i].quantity = cartArray[i].quantity + product.quantity;
 
             pushToCart = false;
             syncCart();
@@ -101,7 +106,10 @@ if (cartArray.length > 0) {
     }
 }
 
-if (pushToCart) {
-    cartArray.push(productObject);
-    syncCart();
+
+
+function syncCart() {
+    cartString = JSON.stringify(cartArray); 
+    localStorage.setItem('cart', cartString); // add the data to the cart localStorage
+    cartArray = JSON.parse(cartString); // cartArray is the parsed version of the cartString object
 }
