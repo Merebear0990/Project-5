@@ -35,7 +35,7 @@ function makeProductCard(productDetails) {
     const productDescription = document.getElementById('description');
     const prodPrice = document.getElementById('price');
     const prodTitle = document.getElementById('title');
-    const prodQuantity = document.getElementById('quantity');
+    const itemQuantity = document.getElementById('quantity');
     const addBtn = document.getElementById('addToCart');
     const prodColors = document.getElementById('colors');
 
@@ -85,10 +85,15 @@ function initProdObject(productDetails) {
 function addToCart(event) {
     let pushToCart = true;
 
+    if (cartArray == null) {
+        cartArray = [];
+    }
+
     if (pushToCart) {
         cartArray.push(product);
         syncCart();
     }
+
 }
 
 console.log(cartArray);
@@ -109,7 +114,7 @@ if (cartArray.length > 0) {
 
 
 function syncCart() {
-    cartString = JSON.stringify(cartArray); 
+    cartString = JSON.stringify(cartArray);
     localStorage.setItem('cart', cartString); // add the data to the cart localStorage
     cartArray = JSON.parse(cartString); // cartArray is the parsed version of the cartString object
 }
