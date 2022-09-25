@@ -1,3 +1,35 @@
+const productID = 'Fred';
+
+
+
+let template = `<article class="cart__item" data-id="${productID}" data-color="{product-color}">
+<div class="cart__item__image">
+  <img src="../images/product01.jpg" alt="Photo of sofa">
+</div>
+
+<div class="cart__item__content">
+  <div class="cart__item__content__description">
+    <h2>Name of the product</h2>
+    <p>Green</p>
+    <p>€42.00</p>
+</div>
+
+ <div class="cart__item__content__settings">
+  <div class="cart__item__content__setting__quantity">
+    <p>Qté : </p>
+    <input type="number" class="itemQuantity" min="1" max="100" value="42">
+  </div>
+   <div class="cart__item__content__settings__delete">
+    <p class="deleteItem">Delete</p>
+   </div>
+  </div>
+ </div>
+<article>`
+console.log(template);
+
+
+
+
 let productLocalStorage = JSON.parse(localStorage.getItem('cart'));
 
 function syncCart() {
@@ -60,6 +92,7 @@ function buildPage() {
             productItemContentDescription.appendChild(productColor);
 
             let productPrice = document.createElement('p');
+            //FIXME priceObject is null
             productPrice.innerHTML = '€' + priceObject[productLocalStorage[i]._id];
             productItemContentDescription.appendChild(productPrice);
 
@@ -241,4 +274,32 @@ function orderItem(event){
     products.push(productLocalStorage[i]._id);
    } 
 
+   const formData = {
+    contact,
+    products,
+   }
+
+   const orderData = {
+    method: 'POST',
+    body: JSON.stringify(formData),
+    headers: {
+        'Content-type': 'application/json',
+    }
+   };
+
+   if (validFirstName === true && validLastName === true && validAddress === true && validCity === true && validEmail === true){
+     fetch('http://localhost:3000/api/products/order', orderData)
+     .then(response => response.json())
+     .then((data) => {
+        let confirmationUrl = './confirmation.html?id=' + data.orderId;
+        localStorage.clear();
+        window.location.href = confirmationUrl;
+     })
+     .catch(error => console.log(error));
+   } else {
+    alert('Please fill out the form properly');
+   }
+
+
 }
+
