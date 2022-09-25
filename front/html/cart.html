@@ -13,7 +13,7 @@
     rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet" />
   <link href="../css/cart.css" rel="stylesheet" />
-
+  <script defer src="/front/javascript/cart.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -57,15 +57,15 @@
         <h1>Your cart</h1>
         <section class="cart">
           <section id="cart__items">
-            <article class="cart__item" data-id="{product-ID}" data-color="{product-color}">
+            <!-- <article class="cart__item" data-id="{product-ID}" data-color="{product-color}">
               <div class="cart__item__img">
                 <img src="../images/product01.jpg" alt="Photo of a sofa">
               </div>
               <div class="cart__item__content">
                 <div class="cart__item__content__description">
                   <h2>Name of the product</h2>
-                  <p>Green</p>
-                  <p>€42.00</p>
+                  <p></p>
+                  <p></p>
                 </div>
                 <div class="cart__item__content__settings">
                   <div class="cart__item__content__settings__quantity">
@@ -77,10 +77,10 @@
                   </div>
                 </div>
               </div>
-            </article> -->
+            </article> --> 
           </section>
           <div class="cart__price">
-            <p>Total (<span id="totalQuantity"> 2</span> articles) : €<span id="totalPrice">84.00</span></p>
+            <p>Total (<span id="totalQuantity"> </span> articles) : €<span id="totalPrice"></span></p>
           </div>
           <div class="cart__order">
             <form method="get" class="cart__order__form">
@@ -90,7 +90,7 @@
                 <p id="firstNameErrorMsg">ci est un message d'erreur</p>
               </div>
               <div class="cart__order__form__question">
-                <label for="lastName">Name: </label>
+                <label for="lastName">Last Name: </label>
                 <input type="text" name="lastName" id="lastName" required>
                 <p id="lastNameErrorMsg"></p>
               </div>
@@ -138,11 +138,11 @@
     </div>
     <div class="limitedWidthBlockContainer footerSecondary">
       <div class="limitedWidthBlock">
-        <p>© Copyright 2021 - 2042 | Openclassrooms by Openclassrooms | All Rights Reserved | Powered by <3< /p>
+        <p>© Copyright 2021 - 2042 | Openclassrooms by Openclassrooms | All Rights Reserved | Powered by <3</p>
       </div>
     </div>
   </footer>
-  <script src="../js/cart.js"></script>
+  
 </body>
 
 </html>
