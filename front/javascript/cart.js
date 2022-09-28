@@ -37,7 +37,7 @@ function syncCart() {
     localStorage.setItem('cart', cartString);
 }
 
-const priceOfProduct = {};
+const productPrices = {};
 fetch('http://localhost:3000/api/products/')
     .then(response => response.json())
     .then(data => initialPrices(data))
@@ -50,9 +50,9 @@ fetch('http://localhost:3000/api/products/')
 function initialPrices(array) {
     const length = array.length;
     for (let i = 0; i < length; i++) {
-        priceOfProduct[array[i]._id] = array[i].price;
+        productPrices[array[i]._id] = array[i].price;
     }
-    console.log(priceOfProduct);
+    console.log(productPrices);
 }
 
 function buildPage() {
@@ -92,8 +92,8 @@ function buildPage() {
             productItemContentDescription.appendChild(productColor);
 
             let productPrice = document.createElement('p');
-            //FIXME priceObject is null
-            productPrice.innerHTML = '€' + priceObject[productLocalStorage[i]._id];
+            
+            productPrice.innerHTML = '€' + productPrices[productLocalStorage[i]._id];
             productItemContentDescription.appendChild(productPrice);
 
             let productItemContentSettings = document.createElement('div');
@@ -118,10 +118,12 @@ function buildPage() {
             productItemContentQuantity.appendChild(productQuantity);
             productQuantity.addEventListener('click', updateQuantity);
 
-            let productDelete = document.createElement('p');
+            let productDelete = document.createElement('button');
+            productDelete.setAttribute("type", "button");
+
             productDelete.className = 'deleteItem';
             productDelete.innerHTML = 'Delete';
-            producteDeleteItem.appendChild(productDelete);
+            productItemContentSettings.appendChild(productDelete);
             productDelete.addEventListener('click', deleteItem);
         }
 
@@ -167,7 +169,7 @@ function getTotals(){
 
     let totalPrice = 0;
       for (let i = 0; i < myLength; i++) {
-        totalPrice += (productQte[i].valueAsNumber * priceObject[productLocalStorage[i]._id]);
+        totalPrice += (productQte[i].valueAsNumber * productPrices[productLocalStorage[i]._id]);
       }
 
     let productTotalPrice = document.getElementById('totalPrice');
@@ -301,5 +303,9 @@ function orderItem(event){
    }
 
 
+
 }
 
+function updateQuantity() {
+    // TODO...
+}
