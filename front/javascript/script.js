@@ -13,8 +13,8 @@ fetch("http://127.0.0.1:3000/api/products")
 
 
 
-      let anchorElement = document.createElement('a');
-      anchorElement.setAttribute("href", `/front/html/product.html?id=${item._id}`);
+        let anchorElement = document.createElement('a');
+        anchorElement.setAttribute("href", `/front/html/product.html?id=${item._id}`);
      
       
       

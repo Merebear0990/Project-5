@@ -35,6 +35,7 @@ function makeProductCard(productDetails) {
     const productDescription = document.getElementById('description');
     const prodPrice = document.getElementById('price');
     const prodTitle = document.getElementById('title');
+    //TODO have Scott check this
     const itemQuantity = document.getElementById('quantity');
     const addBtn = document.getElementById('addToCart');
     const prodColors = document.getElementById('colors');
@@ -43,7 +44,6 @@ function makeProductCard(productDetails) {
     itemImage.setAttribute('src', productDetails.imageUrl);
     itemImage.setAttribute('alt', productDetails.altTxt);
     prodImage.appendChild(itemImage);
-
     prodPrice.innerHTML = productDetails.price;
     prodTitle.innerHTML = productDetails.name;
     productDescription.innerHTML = productDetails.description;
@@ -64,7 +64,7 @@ function makeProductCard(productDetails) {
 
 function updateQuantity(event) {
     console.log(event.target, event.target.value)
-    product.quantity = event.target.value;
+    product.quantity = parseInt(event.target.value, 10); // parseInt(quantity, 10)
     console.log(product)
 }
 
@@ -85,31 +85,28 @@ function initProdObject(productDetails) {
 function addToCart(event) {
     let pushToCart = true;
 
-    if (cartArray == null) {
-        cartArray = [];
+    console.log(cartArray);
+    if (cartArray.length > 0) {
+        
+        for (let i = 0; i < cartArray.length; i++) {
+            if (product._id === cartArray[i]._id &&
+                product.color === cartArray[i].color) {
+                    //if already in cart don't push, do increase quantity
+                    cartArray[i].quantity = cartArray[i].quantity + product.quantity;
+                    //needs to be set to false because we don't want to push
+                    pushToCart = false;
+                    syncCart(); // calling the function syncCart
+                }
+        }
     }
 
     if (pushToCart) {
         cartArray.push(product);
         syncCart();
     }
-
 }
 
-console.log(cartArray);
-if (cartArray.length > 0) {
 
-    for (let i = 0; i < cartArray.length; i++) {
-        if (product.name === cartArray[i].name &&
-            product.color === cartArray[i].color) {
-
-            cartArray[i].quantity = cartArray[i].quantity + product.quantity;
-
-            pushToCart = false;
-            syncCart();
-        }
-    }
-}
 
 
 
