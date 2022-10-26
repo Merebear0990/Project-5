@@ -164,7 +164,7 @@ function deleteItem(event) {
 
 function updateQuantity(e) {
     console.log(e.target);
-    //TODO change to getNearest 
+   
     const productCard = e.target.parentElement.parentElement.parentElement.parentElement;
     console.log(productCard);
     let quantityInput = 0;
@@ -338,6 +338,7 @@ function orderItem(event) {
             .then(response => response.json())
             .then((data) => {
                 let confirmationUrl = './confirmation.html?id=' + data.orderId;
+                //FIXME Null appears in local storage, try setting cart to empty array
                 localStorage.clear();
                 window.location.href = confirmationUrl;
             })
