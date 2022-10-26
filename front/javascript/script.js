@@ -13,11 +13,11 @@ fetch("http://127.0.0.1:3000/api/products")
 
 
 
-        let anchorElement = document.createElement('a');
-        anchorElement.setAttribute("href", `/front/html/product.html?id=${item._id}`);
-     
-      
-      
+      let anchorElement = document.createElement('a');
+      anchorElement.setAttribute("href", `/front/html/product.html?id=${item._id}`);
+
+
+
 
 
 
@@ -27,11 +27,11 @@ fetch("http://127.0.0.1:3000/api/products")
         <img src="${item.imageUrl}" alt="${item.altTxt}">
          <h3 class="productName">${item.name}</h3>
          <p class="productDescription">${item.description}</p></article>`;
-         
 
 
 
-         
+
+
 
 
       let itemsSection = document.getElementById("items");

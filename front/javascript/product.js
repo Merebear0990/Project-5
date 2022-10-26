@@ -87,16 +87,16 @@ function addToCart(event) {
 
     console.log(cartArray);
     if (cartArray.length > 0) {
-        
+
         for (let i = 0; i < cartArray.length; i++) {
             if (product._id === cartArray[i]._id &&
                 product.color === cartArray[i].color) {
-                    //if already in cart don't push, do increase quantity
-                    cartArray[i].quantity = cartArray[i].quantity + product.quantity;
-                    //needs to be set to false because we don't want to push
-                    pushToCart = false;
-                    syncCart(); // calling the function syncCart
-                }
+                //if already in cart don't push, do increase quantity
+                cartArray[i].quantity = cartArray[i].quantity + product.quantity;
+                //needs to be set to false because we don't want to push
+                pushToCart = false;
+                syncCart(); // calling the function syncCart
+            }
         }
     }
 
