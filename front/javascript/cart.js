@@ -30,7 +30,7 @@ console.log(template);
 
 
 // this is the cart array from local storage
-let productLocalStorage = JSON.parse(localStorage.getItem('cart'));
+let productLocalStorage = JSON.parse(localStorage.getItem('cart')) || [];
 
 // updates the cart array
 function syncCart() {
