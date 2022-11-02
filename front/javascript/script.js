@@ -4,6 +4,7 @@
 /*
  * Get all products
  */
+//fetching data on the products from the server
 fetch("http://127.0.0.1:3000/api/products")
   .then(function (resp) {
     return resp.json();
